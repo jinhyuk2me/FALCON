@@ -14,20 +14,51 @@
 
 # 📚 Table of Contents
 
-- [1. Project Overview](#1-project-overview)
-- [2. Key Features](#2-key-features)
-- [3. Core Technologies](#3-core-technologies)
-- [4. Technical Challenges and Solutions](#4-technical-challenges-and-solutions)
-- [5. System Design](#5-system-design)
-- [6. Project Structure](#6-project-structure)
-- [7. Tech Stack](#7-tech-stack)
-- [8. Project Schedule Management](#8-project-schedule-management)
-- [9. Team](#9-team)
+- [1. Team](#1-team)
+- [2. Project Overview](#2-project-overview)
+- [3. Key Features](#3-key-features)
+- [4. Core Technologies](#4-core-technologies)
+- [5. Technical Challenges and Solutions](#5-technical-challenges-and-solutions)
+- [6. System Design](#6-system-design)
+- [7. Project Structure](#7-project-structure)
+- [8. Tech Stack](#8-tech-stack)
+- [9. Project Schedule Management](#9-project-schedule-management)
 - [10. License](#10-license)
 
 ---
 
-# 1. Project Overview
+# 1. Team
+
+### 🧑‍💼 Jongmyung Kim [`@jongbob1918`](https://github.com/jongbob1918)
+- Project lead (documentation and schedule management)
+- Built the ground-object detection AI system (IDS)
+- Researched and implemented ground-object detection models
+- Investigated and tested ArUco-based map coordinate mapping
+
+### 🧑‍💼 Jiyeon Kim [`@heyjay1002`](https://github.com/heyjay1002)
+- Generated pose keypoints and synthetic datasets with Blender
+- Built a custom YOLO pose model for fall detection
+- Designed and implemented the Hawkeye ATC GUI
+- Researched LLM/STT/TTS for the RedWing pilot AI service
+
+### 🧑‍💼 Hyojin Park [`@Park-hyojin`](https://github.com/Park-hyojin)
+- Led system design and backend
+- Built and maintained the main server
+- Designed and managed the database
+- Defined system interfaces and communication architecture
+- Designed the ArUco-based coordinate mapping logic
+
+### 🧑‍💼 Jinhyuk Jang [`@jinhyuk2me`](https://github.com/jinhyuk2me)
+- Implemented the Unity/Blender synthetic data pipeline  
+- Designed and built the real-time bird strike risk analysis AI system (BDS)
+- Developed deep learning models for BDS
+- Developed deep learning models for the IDS ground monitoring system
+- Implemented RedWing ground-guidance assistance for pilots
+- Built RedWing TTS warning and auto-response features
+
+---
+
+# 2. Project Overview
 
 Major airports worldwide continue to report severe incidents such as **bird strikes**, **Foreign Object Debris (FOD) accidents**, and **runway incursions**. These incidents are usually the result of a combination of factors: high **cognitive load** for controllers and pilots, **sensor limitations**, and delayed information handoffs.
 
@@ -52,7 +83,7 @@ FALCON was created to raise the **safety and efficiency** of flight operations a
 
 ---
 
-# 2. Key Features
+# 3. Key Features
 
 ## 🛫 Air Traffic Controller AI Service: `Hawkeye`
 
@@ -103,7 +134,7 @@ FALCON was created to raise the **safety and efficiency** of flight operations a
 
 ---
 
-# 3. Core Technologies
+# 4. Core Technologies
 
 ## 1) Simulation-based Training and Prediction
 
@@ -328,7 +359,7 @@ Combined static and dynamic pose estimation to precisely interpret marshaller ge
 
 ---
 
-# 4. Technical Challenges and Solutions
+# 5. Technical Challenges and Solutions
 
 ### 📉 YOLO accuracy degradation
 
@@ -376,7 +407,7 @@ Combined static and dynamic pose estimation to precisely interpret marshaller ge
 
 ---
 
-# 5. System Design
+# 6. System Design
 
 ## System Architecture
 ![system_architecture](https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/software_architecture.png?raw=true)
@@ -386,7 +417,7 @@ Combined static and dynamic pose estimation to precisely interpret marshaller ge
 
 ---
 
-# 6. Project Structure
+# 7. Project Structure
 
 ```
 FALCON/
@@ -420,7 +451,7 @@ FALCON/
 
 ---
 
-# 7. Tech Stack
+# 8. Tech Stack
 
 | Category | Technologies |
 |----------|--------------|
@@ -433,44 +464,13 @@ FALCON/
 
 ---
 
-# 8. Project Schedule Management
+# 9. Project Schedule Management
 
 Managed the program with Confluence and Jira. Visualized task assignment, development progress, and issue tracking to keep collaboration on track.
 
 <p align="center">
   <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/Jjra_manage.gif?raw=true" width="100%">
 </p>
-
----
-
-# 9. Team
-
-### 🧑‍💼 Jongmyung Kim [`@jongbob1918`](https://github.com/jongbob1918)
-- Project lead (documentation and schedule management)
-- Built the ground-object detection AI system (IDS)
-- Researched and implemented ground-object detection models
-- Investigated and tested ArUco-based map coordinate mapping
-
-### 🧑‍💼 Jiyeon Kim [`@heyjay1002`](https://github.com/heyjay1002)
-- Generated pose keypoints and synthetic datasets with Blender
-- Built a custom YOLO pose model for fall detection
-- Designed and implemented the Hawkeye ATC GUI
-- Researched LLM/STT/TTS for the RedWing pilot AI service
-
-### 🧑‍💼 Hyojin Park [`@Park-hyojin`](https://github.com/Park-hyojin)
-- Led system design and backend
-- Built and maintained the main server
-- Designed and managed the database
-- Defined system interfaces and communication architecture
-- Designed the ArUco-based coordinate mapping logic
-
-### 🧑‍💼 Jinhyuk Jang [`@jinhyuk2me`](https://github.com/jinhyuk2me)
-- Implemented the Unity/Blender synthetic data pipeline  
-- Designed and built the real-time bird strike risk analysis AI system (BDS)
-- Developed deep learning models for BDS
-- Developed deep learning models for the IDS ground monitoring system
-- Implemented RedWing ground-guidance assistance for pilots
-- Built RedWing TTS warning and auto-response features
 
 ---
 
