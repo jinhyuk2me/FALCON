@@ -29,6 +29,14 @@
 
 # 1. Team
 
+### 🧑‍💼 Jinhyuk Jang [`@jinhyuk2me`](https://github.com/jinhyuk2me)
+- Implemented the Unity/Blender synthetic data pipeline  
+- Designed and built the real-time bird strike risk analysis AI system (BDS)
+- Developed deep learning models for BDS
+- Developed deep learning models for the IDS ground monitoring system
+- Implemented RedWing ground-guidance assistance for pilots
+- Built RedWing TTS warning and auto-response features
+
 ### 🧑‍💼 Jongmyung Kim [`@jongbob1918`](https://github.com/jongbob1918)
 - Project lead (documentation and schedule management)
 - Built the ground-object detection AI system (IDS)
@@ -47,14 +55,6 @@
 - Designed and managed the database
 - Defined system interfaces and communication architecture
 - Designed the ArUco-based coordinate mapping logic
-
-### 🧑‍💼 Jinhyuk Jang [`@jinhyuk2me`](https://github.com/jinhyuk2me)
-- Implemented the Unity/Blender synthetic data pipeline  
-- Designed and built the real-time bird strike risk analysis AI system (BDS)
-- Developed deep learning models for BDS
-- Developed deep learning models for the IDS ground monitoring system
-- Implemented RedWing ground-guidance assistance for pilots
-- Built RedWing TTS warning and auto-response features
 
 ---
 
