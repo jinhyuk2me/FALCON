@@ -5,238 +5,212 @@
     <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge" alt="License">
   </a>
   <a href="https://docs.google.com/presentation/d/1z73na_gwi2OX0oAGJ8FHGI7qYufhDPk5QCgtm7bIQoM/edit?usp=sharing">
-    <img src="https://img.shields.io/badge/PRESENTATION-GoogleSlides-yellow?style=for-the-badge&logo=google-slides&logoColor=white" alt="Presentation Deck">
+    <img src="https://img.shields.io/badge/PRESENTATION-GoogleSlides-yellow?style=for-the-badge&logo=google-slides&logoColor=white" alt="발표자료">
   </a>
   <a href="https://youtube.com/playlist?list=PLCGG9KRfKwMmQqXvp43pChNMyyLSyjHp9&si=Qhge_jErHH7Qlb4e">
-    <img src="https://img.shields.io/badge/DEMO-YouTube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Demo Playlist">
+    <img src="https://img.shields.io/badge/DEMO-YouTube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="ATC AI Service">
   </a>
 </p>
 
-# 📚 Table of Contents
+# 📚 목차
 
-- [1. Team](#1-team)
-- [2. Project Overview](#2-project-overview)
-- [3. Key Features](#3-key-features)
-- [4. Core Technologies](#4-core-technologies)
-- [5. Technical Challenges and Solutions](#5-technical-challenges-and-solutions)
-- [6. System Design](#6-system-design)
-- [7. Project Structure](#7-project-structure)
-- [8. Tech Stack](#8-tech-stack)
-- [9. Project Schedule Management](#9-project-schedule-management)
-- [10. License](#10-license)
+> 📄 English version: [`README.en.md`](README.en.md)
 
----
-
-# 1. Team
-
-### 🧑‍💼 Jinhyuk Jang [`@jinhyuk2me`](https://github.com/jinhyuk2me)
-- Implemented the Unity/Blender synthetic data pipeline  
-- Designed and built the real-time bird strike risk analysis AI system (BDS)
-- Developed deep learning models for BDS
-- Developed deep learning models for the IDS ground monitoring system
-- Implemented RedWing ground-guidance assistance for pilots
-- Built RedWing TTS warning and auto-response features
-
-### 🧑‍💼 Jongmyung Kim [`@jongbob1918`](https://github.com/jongbob1918)
-- Project lead (documentation and schedule management)
-- Built the ground-object detection AI system (IDS)
-- Researched and implemented ground-object detection models
-- Investigated and tested ArUco-based map coordinate mapping
-
-### 🧑‍💼 Jiyeon Kim [`@heyjay1002`](https://github.com/heyjay1002)
-- Generated pose keypoints and synthetic datasets with Blender
-- Built a custom YOLO pose model for fall detection
-- Designed and implemented the Hawkeye ATC GUI
-- Researched LLM/STT/TTS for the RedWing pilot AI service
-
-### 🧑‍💼 Hyojin Park [`@Park-hyojin`](https://github.com/Park-hyojin)
-- Led system design and backend
-- Built and maintained the main server
-- Designed and managed the database
-- Defined system interfaces and communication architecture
-- Designed the ArUco-based coordinate mapping logic
+- [1. 프로젝트 개요](#1-프로젝트-개요)
+- [2. 주요 기능](#2-주요-기능)
+- [3. 핵심 기술](#3-핵심-기술)  
+- [4. 기술적 문제 및 해결](#4-기술적-문제-및-해결)
+- [5. 시스템 설계](#5-시스템-설계)
+- [6. 프로젝트 구조](#6-프로젝트-구조)
+- [7. 기술 스택](#7-기술-스택)
+- [8. 일정 관리](#8-프로젝트-일정-관리)
+- [9. 팀 구성](#9-팀-구성)
+- [10. 라이선스](#10-라이선스)
 
 ---
 
-# 2. Project Overview
+# 1. 프로젝트 개요
 
-Major airports worldwide continue to report severe incidents such as **bird strikes**, **Foreign Object Debris (FOD) accidents**, and **runway incursions**. These incidents are usually the result of a combination of factors: high **cognitive load** for controllers and pilots, **sensor limitations**, and delayed information handoffs.
+국내외 공항에서는 **조류 충돌**, **FOD 사고**, **활주로 오진입** 등 중대 사고가 **반복적으로 발생**하고 있습니다.  
+이는 관제사·조종사의 **인지 부담**, 감지 장비의 **한계**, 정보 전달 지연 등 복합적인 요인에 기인합니다.
 
-| Case | Year | Root Cause |
-|------|------|------------|
-| Muan Airport bird strike | 2024 | Lack of detection system |
-| Concorde FOD accident | 2000 | Debris left on runway |
-| Austin runway incursion | 2023 | Control error + situational awareness failure |
+| 사례 | 발생 연도 | 원인 요약 |
+|------|------------|----------------|
+| 무안공항 조류충돌 | 2024 | 감지 시스템 부재 |
+| 콩코드 FOD 사고 | 2000 | 이물질 미제거 |
+| 오스틴 활주로 오진입 | 2023 | 관제 실수 + 인지 오류 |
 
-FALCON was created to raise the **safety and efficiency** of flight operations and pursues three core values.
+FALCON은 이러한 문제의식을 바탕으로, 항공 운항의 **안전성과 효율성**을 높이기 위한 **세 가지 핵심 가치를 제안합니다.**
 
-## 💡 FALCON's Core Values
+## 💡 FALCON의 핵심 가치
 
-- **Real-time risk discovery**  
-  Automatically detects threats humans may miss to **eliminate blind spots**
+- **위험요소 실시간 탐지**  
+  사람이 놓칠 수 있는 위험요소를 자동 감지해 **사각지대 제거**
 
-- **Decision-support assistance**  
-  Hand signal interpretation, risk assessment, and voice responses **reduce cognitive load**
+- **판단 지원 기능**  
+  수신호 분석, 위험 판단, 음성 응답 등으로 **인지 부담 감소**
 
-- **Immediate information delivery**  
-  Provides risk information with **GUI/TTS** so crews can respond faster
-
+- **즉각적인 정보 전달**  
+  위험 정보를 **GUI/TTS**로 자동 제공해 **반응 속도 향상**
 ---
 
-# 3. Key Features
+# 2. 주요 기능
 
-## 🛫 Air Traffic Controller AI Service: `Hawkeye`
+## 🛫 관제사 AI 서비스: `Hawkeye`
 
 <p align="center">
   <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/hawkeye_mainpage.gif?raw=true" width="60%">
 </p>
 
-- **Ground hazard detection**
-  - CCTV-based video analytics
-  - When birds, FOD, people, or vehicles are detected, show GUI popups and map markers
-  - Continuously update risk levels and write logs
-  - [Watch video](https://youtu.be/lctXpBYrVsU)
+- **지상 위험요소 탐지**
+  - CCTV 기반 영상 분석
+  - 조류, FOD, 사람, 차량 등 탐지 시 GUI 팝업 및 지도 마커 표시
+  - 위험도 상태 갱신 및 로그 생성
+  - [영상 보기](https://youtu.be/lctXpBYrVsU)
 
-- **Ground fall detection**
-  - Recognizes civilians/workers who have fallen
-  - Visualizes risk gauge (location, time, severity)
-  - Provides visual summary to help decide if rescue is needed
-  - [Watch video](https://youtu.be/jvWLBKryymM)
+- **지상 쓰러짐 감지**
+  - 일반인 / 작업자의 쓰러짐 상태 인식
+  - 위험도 게이지 시각화 (예: 쓰러진 위치, 시간, 위험 수치)
+  - 구조 필요성 판단을 위한 시각적 정보 제공
+  - [영상 보기](https://youtu.be/jvWLBKryymM)
 
-- **Ground access control**
-  - Configure zone-based clearance levels (Level 1–3)
-  - Detect and alert on access violations automatically
-  - Reflect clearance updates on the GUI in real time
-  - [Watch video](https://youtu.be/5NFzvtAFr_I)
+- **지상 출입 통제**
+  - 구역별 출입등급 설정 (1~3단계)
+  - 출입 위반 시 자동 감지 및 알림
+  - 출입 조건 변경 시 실시간 GUI 반영
+  - [영상 보기](https://youtu.be/5NFzvtAFr_I)
 
 ---
 
-## ✈️ Pilot AI Service: `RedWing`
+## ✈️ 조종사 AI 서비스: `RedWing`
 
 <p align="center">
   <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/dynamic_pose.gif?raw=true" width="60%">
 </p>
 
-- **Flight risk alerts**
-  - Real-time TTS warnings for bird strikes and runway hazards
-  - Connects video analytics with the risk assessment model
-  - [Watch video](https://youtu.be/-si0u8I1h2A)
 
-- **Risk inquiry auto-response**
-  - Voice query (STT) → LLM classification → Voice response (TTS)
-  - Example: “Runway Alpha status?” → “Runway Alpha is CLEAR.”
-  - [Watch video](https://youtu.be/VvQjRLMTrvU)
+- **운항 위험 경보**
+  - 조류 충돌, 활주로 위험요소 등을 실시간 TTS로 경고
+  - 영상 분석 + 위험 판단 모델 연동
+  - [영상 보기](https://youtu.be/-si0u8I1h2A)
 
-- **Ground guidance assistance**
-  - Recognizes marshaller hand signals (stop, proceed, turn left/right) in CCTV footage
-  - Converts the signal into spoken instructions for pilots
-  - [Watch video](https://youtu.be/sB_zEFfP7kI)
+- **위험도 질의 자동응답**
+  - 음성 질의(STT) → LLM 분류 → 음성 응답(TTS)
+  - 예: “Runway Alpha status?” → “Runway Alpha is CLEAR.”
+  - [영상 보기](https://youtu.be/VvQjRLMTrvU)
 
+- **지상 유도 보조**
+  - CCTV 영상 내 유도사 수신호(정지, 전진, 좌우회전 등) 인식
+  - 수신호 분석 결과를 조종사에게 음성 안내로 전달
+  - [영상 보기](https://youtu.be/sB_zEFfP7kI)
+ 
 ---
 
-# 4. Core Technologies
+# 3. 핵심 기술
 
-## 1) Simulation-based Training and Prediction
+## 1) 시뮬레이션 기반 학습 및 예측
 
-- **Unity-based airport environment simulator (`RunwaySim`)**
-  - Models runways and surrounding infrastructure
-  - Generates automated pipelines for training ground-object detection models
+- **Unity 기반 공항 환경 시뮬레이터(`RunwaySim`) 구성**:
+  - 모형 활주로 및 주변 환경 모델링
+  - 지상 객체 탐지 딥러닝 모델 학습을 위한 자동 파이프라인을 위해 제작
 
 <p align="center">
   <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/runwaysim.gif?raw=true" width="60%">
 </p>
 
-- **Unity-based real-time bird strike risk simulator (`BirdRiskSim`)**
-  - Predicts bird positions from fixed CCTV footage
-  - Calculates **collision probability** using relative distances and velocities between birds, aircraft, and air routes
+- **Unity 기반 실시간 조류 충돌 위험도 시뮬레이터(`BirdRiskSim`) 구성**:
+  - 고정 CCTV 영상 기반 조류 위치 예측
+  - 조류-항공기 상대 거리, 조류-항로 상대 거리, 조류-항공기 상대 속도를 분석하여 **충돌 확률** 산출
 
 <p align="center">
   <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/bird_sim.gif?raw=true" width="60%">
 </p>
 
-## 2) Object Detection
+## 2) 객체 탐지 (Object Detection)
+공항 환경에서 발생할 수 있는 다양한 위험요소를 **지상(Ground)** 과 **상공(Aerial)** 영역으로 구분하여 탐지하는 이중 구조로 설계되었습니다.
 
-Airport risks are divided into **ground** and **aerial** zones, and each zone uses a dedicated detection pipeline.
+### 🧱 지상 객체 감지 (Ground Object Detection)
 
-### 🧱 Ground Object Detection
+- **탐지 클래스**: 조류, FOD, 사람, 야생동물, 항공기, 차량 (총 6종)
 
-- **Detection classes**: birds, FOD, people, wildlife, aircraft, and vehicles (6 total)
-
-- **Dataset composition**:
-  - Hybrid dataset of Unity-simulated imagery and miniature airport photos
-  - Automated labeling pipeline using Polycam, Blender, and Unity-based 3D scans
-  - Simulated diverse lighting, angles, and environments to increase variation
-  - Automatically generate ~3,000 labeled images per hour
-
+- **데이터셋 구성**:
+  - Unity 기반 시뮬레이션 이미지 + 실제 공항 모형 촬영 이미지로 구성된 Hybrid Dataset
+  - Polycam, Blender, Unity를 활용한 3D 스캔 기반 자동 라벨링 파이프라인 구축
+  - 다양한 조명/각도/환경 조건을 시뮬레이션하여 데이터 다양성 확보
+  - 1시간당 약 3,000장의 이미지와 라벨 자동 생성 가능
+ 
 <table align="center">
   <tr>
     <td align="center">
       <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/poly_bird.gif?raw=true" width="200px"><br>
-      <sub>Bird</sub>
+      <sub>조류</sub>
     </td>
     <td align="center">
       <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/poly_fod.gif?raw=true" width="200px"><br>
-      <sub>FOD</sub>
+      <sub>FOD(이물질)</sub>
     </td>
     <td align="center">
       <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/poly_animal.gif?raw=true" width="200px"><br>
-      <sub>Wild animal</sub>
+      <sub>야생동물</sub>
     </td>
     <td align="center">
       <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/poly_truck.gif?raw=true" width="200px"><br>
-      <sub>Vehicle</sub>
+      <sub>차량</sub>
     </td>
   </tr>
 </table>
 
 <div align="center">
   <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/blender.gif?raw=true" width="60%"><br>
-  <sub>Automated labeling pipeline using Blender</sub>
+  <sub>Blender를 이용한 자동 라벨링 파이프라인 구축</sub>
 </div>
 
-- **Model architecture and training setup**:
-  - YOLOv8n-box (960×960 input, 150 epochs, batch size 8)
-  - Dataset split: Train 69.4% / Validation 20.9% / Test 9.8%
+- **모델 아키텍처 및 학습 설정**:
+  - YOLOv8n-box 사용 (960×960 해상도, 150 epoch, batch size 8)
+  - 데이터 분할: Train (69.4%) / Validation (20.9%) / Test (9.8%)
 
-- **Post-processing classification**:
-  - Detect hi-vis (HV) vests with OpenCV to determine if a person is authorized
-  - Use vehicle color features to distinguish work vehicles vs. general vehicles
-
+- **후처리 기반 식별 기능**:
+  - OpenCV로 형광 조끼(HV 색상) 인식 → 작업자 여부 판단
+  - 차량 색상 기반 분류 → 일반 차량과 작업 차량 구분
+ 
 <table align="center">
   <tr>
     <td align="center">
       <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/work_person.gif?raw=true" width="200px"><br>
-      <sub>Authorized / unauthorized personnel</sub>
+      <sub>인가자/비인가자</sub>
     </td>
     <td align="center">
       <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/work_vehicle.gif?raw=true" width="200px"><br>
-      <sub>Authorized / unauthorized vehicles</sub>
+      <sub>인가차량/비인가차량</sub>
     </td>
   </tr>
 </table>
 
-- **Model performance (v0.3)**:
+
+
+- **모델 성능 (v0.3 기준)**:
   - mAP@0.5: **0.9902**
   - mAP@0.5:0.95: **0.9005**
   - Precision: **0.9928**
   - Recall: **0.9672**
 
-- **Key improvements**:
-  - ~50% lighter and faster than the initial YOLOv11-seg model
-  - Added negative samples to eliminate ArUco marker false positives
+- **주요 개선사항**:
+  - YOLOv11-seg 기반 초기 모델 대비 약 50% 경량화 및 속도 개선
+  - Negative Sample 학습을 통해 ArUco 마커 오인식 문제 해결
 
-### 🛩️ Aerial Object Detection
+### 🛩️ 상공 객체 감지 (Aerial Object Detection)
 
-Specialized YOLOv8-based model for detecting **aerial threats** such as birds. Powers the **BDS (Bird Detection System)** and provides the **flight risk alert** feature.
+조류 등 **공중 위험요소**를 실시간으로 탐지하기 위해 YOLOv8 기반으로 개발된 특화 모델.  
+FALCON의 **BDS (Bird Detection System)** 에 탑재되어 **운항 위험 경보** 기능을 수행한다.
 
-- **Training data**
-  - Total epochs: `72`, final learning rate: `0.000495`
-  - Framework: YOLOv8
+- **학습 정보**
+  - 총 Epoch: `72`, 최종 학습률: `0.000495`
+  - 프레임워크: YOLOv8
 
-- **Performance summary**
+- **성능 요약**
 
-  | Metric | Epoch 69 (best) | Epoch 72 (final) |
-  |--------|-----------------|------------------|
+  | 지표 | Epoch 69 (최고 성능) | Epoch 72 (최종 성능) |
+  |------|------------------------|------------------------|
   | `mAP@0.5` | 0.9455 | 0.9438 |
   | `mAP@0.5:0.95` | 0.8278 | **0.8342** |
   | `Precision` | **0.9850** | 0.9787 |
@@ -244,61 +218,62 @@ Specialized YOLOv8-based model for detecting **aerial threats** such as birds. P
 
 ---
 
-## 3) Object Tracking
+## 3) 객체 추적 (Object Tracking)
 
-### (1) Ground object tracking
-- Uses the `ByteTrack` algorithm (Ultralytics built-in)
-- Combines low-score detection with a `Kalman Filter`
-- Meets both real-time and accuracy requirements
+### (1) 지상 객체 추적:
+  - `ByteTrack` 알고리즘 사용 (Ultralytics 내장)
+  - `Low Score Detection` + `Kalman Filter` 기반 예측
+  - 실시간성과 정확성 우수
 
 <p align="center">
   <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/byte_track.gif?raw=true" width="50%">
 </p>
 
-### (2) Aerial object tracking
+### (2) 공중 객체 추적 (Aerial Object Tracking)
 
-To predict and respond to aerial threats such as bird strikes, FALCON integrates **triangulation-based localization**, **ByteTrack-based object tracking**, and **Unity-driven risk computation**.
+조류 충돌과 같은 공중 위험을 예측하고 대응하기 위해, FALCON은 **삼각측량 기반 위치 추정**, **ByteTrack 기반 객체 추적**, 그리고 **Unity 시뮬레이터 기반 위험도 계산** 기술을 통합하여 다음과 같은 시스템을 구현하였다.
 
-- **📌 Feasibility validation**
-  - Reconstructed the bird flock trajectory from the 2024 Muan Airport incident using nearby CCTV after the fact.
-  - Confirmed that triangulation and tracking can deliver real-time bird-strike risk scores.
+- **📌 기술적 가능성 검토**
+  - 2024년 무안공항 조류 충돌 사고를 기반으로 주변 CCTV 영상으로 충돌 직전 새떼의 이동 경로를 사고 이후에 복원.
+  - 이를 활용해 삼각측량 및 트래킹 기술을 활용한 조류 충돌 실시간 위험도 산출 기능 구현이 실제로 가능할 것으로 판단하였음.
 
 <p align="center">
   <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/bds_muan.png?raw=true" width="60%">
 </p>
 
-- **🌐 Simulation environment**
-  - Modeled actual airport terrain in Unity
-  - Generated multiple weather and flight scenarios
-  - Aircraft follow Bézier-curve paths and support multi-flight simulations
+- **🌐 시뮬레이션 환경 구성**
+  - 실제 공항 지형을 Unity로 모델링
+  - 다양한 기상 조건 및 비행 경로 시나리오 생성
+  - 항공기는 베지어 곡선 기반 경로로 이동하며 다중 비행 지원
 
 <p align="center">
   <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/bird_sim.gif?raw=true" width="60%">
 </p>
 
-- **🛰️ CCTV-based bird localization (triangulation) and path tracking**
-  - Two synchronized CCTV feeds inside the Unity simulator
-  - Detect 2D bird and aircraft positions in each view
-  - Estimate 3D coordinates using triangulation
-  - Track frame-to-frame positions with ByteTrack using the 3D data
+- **🛰️ CCTV 기반 조류 위치 추정 (Triangulation) 및 실시간 경로 추적**
+  - Unity 시뮬레이터 내 2대의 고정 CCTV를 통해 **동기화된 영상 프레임 확보**
+  - 각 CCTV에서 조류와 항공기의 2D 위치를 감지
+  - 삼각측량 알고리즘을 통해 3D 실제 위치 계산
+  - 추정된 3D 위치 데이터를 기반으로 ByteTrack으로 **프레임 간 추적**
 
 <table align="center">
   <tr>
     <td align="center">
       <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/triangulation.gif?raw=true" width="400px"><br>
-      <sub>Triangulation-based localization</sub>
+      <sub>삼각측량을 통한 위치 추정</sub>
     </td>
     <td align="center">
       <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/skytrack.gif?raw=true" width="400px"><br>
-      <sub>ByteTrack trajectory tracking</sub>
+      <sub>ByteTrack을 통한 경로 추적</sub>
     </td>
   </tr>
 </table>
 
-- **🧠 Real-time bird strike risk scoring**
-  - Analyze relative distance, velocity, and direction of birds vs. aircraft  
-    Output qualitative risk levels (e.g., `BR_MEDIUM`)
-  - Deliver warnings to controllers and pilots via GUI and voice interface
+
+- **🧠 실시간 조류 충돌 위험도 계산**
+  - 조류와 항공기의 **상대 거리, 속도, 방향**을 분석하여  
+    **충돌 위험도 수치화 (예: BR_MEDIUM 등급)**  
+  - GUI 및 음성 인터페이스를 통해 조종사/관제사에게 실시간 경고 전달
 
 <p align="center">
   <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/bds_result.gif?raw=true" width="80%">
@@ -306,81 +281,81 @@ To predict and respond to aerial threats such as bird strikes, FALCON integrates
 
 ---
 
-## 4) Pose Estimation
+## 4) 자세 감지 (Pose Estimation)
 
-Combined static and dynamic pose estimation to precisely interpret marshaller gestures.
+지상 유도사의 제스처를 정확하게 인식하기 위해 정적 및 동적 자세 감지 기술을 결합하여 적용하였다.
 
-### (1) Static pose estimation
-- `YOLOv8n-pose` extracts 17 keypoints
-- Trained on 683 Blender-generated synthetic images + real captures
-- Detects falls by analyzing keypoint tilt
+### (1) 정적 자세 감지
+- `YOLOv8n-pose` 기반으로 17개 Keypoint 추출
+- Blender 기반 합성 데이터(683장) + 실제 촬영 데이터로 학습
+- Keypoint 기울기 분석을 통해 쓰러짐 판단 가능
 
-### (2) Dynamic pose estimation
+### (2) 동적 자세 감지
 
-- **Model**
+- **모델 구조**:
   - Temporal Convolutional Network (TCN)
-  - Input: 17 joints × (x, y) coordinates → 34 features over 30 frames
-  - Output classes: `stop`, `forward`, `left`, `right`
+  - 입력: 17개 관절의 x, y 좌표 (총 34개 feature), 30프레임 시퀀스
+  - 출력 클래스: `stop`, `forward`, `left`, `right` (총 4종)
 
-- **Dataset**
-  - 3,984 sequences (train 80%, test 20%)
-  - MediaPipe-based 17-joint coordinates
+- **데이터셋 구성**:
+  - 총 3,984개의 시퀀스 (train: 80%, test: 20%)
+  - MediaPipe 기반 17개 관절 좌표 사용
 
-- **Performance**
+- **성능 요약**:
   - Accuracy: **98.99%**
   - Precision: **99.00%**, Recall: **98.99%**, F1-Score: **98.99%**
-  - Avg. confidence: **98.62%**, Std: 6.64%
+  - 평균 신뢰도: **98.62%**, 표준편차: 6.64%
 
-- **Per-class metrics (test set)**
+- **클래스별 성능 (테스트셋 기준)**:
 
-  | Gesture | Precision | Recall | F1-Score |
-  |---------|-----------|--------|----------|
-  | Stop    | 98.55%    | 99.51% | 99.03%   |
-  | Forward | 99.46%    | 97.87% | 98.66%   |
-  | Left    | 98.57%    | 99.52% | 99.04%   |
-  | Right   | 99.49%    | 98.98% | 99.23%   |
+  | 제스처   | Precision | Recall | F1-Score |
+  |----------|-----------|--------|----------|
+  | Stop     | 98.55%    | 99.51% | 99.03%   |
+  | Forward  | 99.46%    | 97.87% | 98.66%   |
+  | Left     | 98.57%    | 99.52% | 99.04%   |
+  | Right    | 99.49%    | 98.98% | 99.23%   |
 
 ---
 
-## 5) Coordinate Mapping
+## 5) 좌표계 변환 (Coordinate Mapping)
 
 <p align="center">
   <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/output_trim.gif?raw=true" width="50%">
 </p>
 
-- **ArUco-based world coordinate mapping**
-  - Uses OpenCV `perspectiveTransform()`
-  - Maps ArUco marker pixel centers to real-world coordinates
-  - Achieves ±5 mm/pixel accuracy
+- **ArUco 기반 실제 맵 좌표 변환**:
+  - OpenCV의 `perspectiveTransform()` 사용
+  - ArUco 마커 중심점의 픽셀 좌표 ↔ 실제 좌표로 매핑
+  - 오차 범위 ±5mm/픽셀 수준의 정밀도
 
-- **Object center correction**
-  - Converts detected bounding-box centers into real-world positions
-  - Used to check zone intrusions and access violations
+- **객체 중심 좌표 보정**:
+  - 감지된 객체의 Bounding Box 중심을 실시간 위치로 변환
+  - 구역 침범 여부, 출입 위반 판단 등에 활용
 
 ---
 
-# 5. Technical Challenges and Solutions
+## 4. 기술적 문제 및 해결
 
-### 📉 YOLO accuracy degradation
+### 📉 YOLO 정확도 저하
 
-**Problem**  
-- Low detection accuracy during real-world tests
+**문제**  
+- 실사 기반 테스트 시 객체 탐지 정확도 낮음  
 
 <div align="center">
 
-| Original YOLO PR curve | Original real-world test |
+| 기존 YOLO 모델 성능 (PR Curve) | 기존 모델 실사 테스트 |
 |:--:|:--:|
 | <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/pr_curve_Image_seg_model.png?raw=true" width="400"> | <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/old_real_test.gif?raw=true" width="400"> |
 
 </div>
 
-**Solution**  
-- Built a **hybrid dataset** combining real and synthetic data  
-- Retrained using YOLOv8n-box
+**해결**  
+- 실제 + 합성 데이터 결합한 **Hybrid Dataset** 구성  
+- YOLOv8n-box 모델 재학습
 
 <div align="center">
 
-| Hybrid model PR curve | Hybrid model real-world test |
+| Hybrid 모델 PR Curve | Hybrid 모델 실사 테스트 |
 |:--:|:--:|
 | <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/pr_curve_Hybrid_box_model.png?raw=true" height="300" width="400"> | <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/real_test.gif?raw=true" height="300" width="400"> |
 
@@ -388,85 +363,90 @@ Combined static and dynamic pose estimation to precisely interpret marshaller ge
 
 ---
 
-### 🧍‍♂️ Pose keypoint detection errors
+### 🧍‍♂️ Pose Keypoint 인식 오류
 
-**Problem**  
-- Keypoints were inaccurate when subjects lay down or were upside down
+**문제**  
+- 사람이 **눕거나 뒤집힌 자세**일 때 keypoint 인식률 저하
 
-**Solution**  
-- Generated **683** Blender-based synthetic poses  
-- Retrained YOLOv8n-pose → higher fall-detection accuracy
+**해결**  
+- Blender로 포즈 합성 이미지 **683장** 생성  
+- YOLOv8n-pose 모델 학습 → 쓰러짐 감지 성능 향상
 
 <div align="center">
 
-| Previous pose model | Improved pose model |
+| 기존 모델 Pose 인식 결과 | 개선된 모델 인식 결과 |
 |:--:|:--:|
 | <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/old_poseㅐ.png?raw=true" height="300" width="400"> | <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/pose.png?raw=true" height="300" width="400"> |
 
 </div>
 
+
+
 ---
 
-# 6. System Design
+# 5. 시스템 설계
 
-## System Architecture
+## 시스템 아키텍처
 ![system_architecture](https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/software_architecture.png?raw=true)
 
-## ER Diagram
+## ER 다이어그램
 ![er_diagram](https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/er_diagram.png?raw=true)
 
 ---
 
-# 7. Project Structure
+# 6. 프로젝트 구조
 
 ```
 FALCON/
 ├── src/
-│   ├── systems/              # Core systems
-│   │   ├── bds/              # Bird Detection System
-│   │   └── ids/              # Intrusion Detection System
+│   ├── systems/              # 핵심 시스템
+│   │   ├── bds/             # Bird Detection System
+│   │   └── ids/             # Intrusion Detection System
 │   │
-│   ├── simulation/          # Simulation
-│   │   ├── bird_sim/        # Bird strike simulation
-│   │   └── runway_sim/      # Runway simulation
+│   ├── simulation/          # 시뮬레이션
+│   │   ├── bird_sim/        # 새 충돌 시뮬레이션
+│   │   └── runway_sim/      # 활주로 시뮬레이션
 │   │
-│   ├── interfaces/          # User interfaces
-│   │   ├── hawkeye/         # ATC GUI
-│   │   └── redwing/         # Pilot GUI
+│   ├── interfaces/          # 사용자 인터페이스
+│   │   ├── hawkeye/         # 관제사용 GUI
+│   │   └── redwing/         # 조종사용 GUI
 │   │
-│   ├── infrastructure/      # System infrastructure
-│   │   └── server/          # Server code
+│   ├── infrastructure/      # 시스템 인프라
+│   │   └── server/          # 서버 코드
 │   │
-│   ├── shared/              # Shared modules
-│   │   └── utils/           # Utilities
+│   ├── shared/              # 공통 모듈
+│   │   └── utils/           # 유틸리티
 │   │
-│   └── tests/               # Tests
-│       └── technical_test/  # Technical validation
+│   └── tests/               # 테스트 코드
+│       └── technical_test/  # 기술 검증
 │
-├── docs/                    # Documentation
-├── assets/                  # Assets
-├── tools/                   # Tools
-└── README.md                # Project overview
+├── docs/                    # 문서
+├── assets/                  # 리소스
+├── tools/                   # 도구
+└── README.md               # 프로젝트 설명서
 ```
 
 ---
 
-# 8. Tech Stack
+# 7. 기술 스택
 
-| Category | Technologies |
-|----------|--------------|
+| 분류 | 사용 기술 |
+|------|-----------|
 | **ML / DL** | ![YOLOv8](https://img.shields.io/badge/YOLOv8-FFB400?style=for-the-badge&logo=yolov5&logoColor=black) ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white) ![ByteTrack](https://img.shields.io/badge/ByteTrack-222222?style=for-the-badge&logo=github&logoColor=white) ![TCN](https://img.shields.io/badge/TCN-800080?style=for-the-badge&logo=neural&logoColor=white) ![MediaPipe](https://img.shields.io/badge/MediaPipe-FF6F00?style=for-the-badge&logo=google&logoColor=white)<br>![Whisper](https://img.shields.io/badge/Whisper-9467BD?style=for-the-badge&logo=openai&logoColor=white) ![Ollama](https://img.shields.io/badge/Ollama-333333?style=for-the-badge&logo=vercel&logoColor=white) ![Coqui](https://img.shields.io/badge/Coqui-FFD166?style=for-the-badge&logo=soundcloud&logoColor=black) ![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white) ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white) |
 | **GUI** | ![PyQt6](https://img.shields.io/badge/PyQt6-41CD52?style=for-the-badge&logo=qt&logoColor=white) |
-| **Database** | ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white) |
-| **Networking / Communication** | ![Socket](https://img.shields.io/badge/Socket-000000?style=for-the-badge&logo=socketdotio&logoColor=white) ![JSON](https://img.shields.io/badge/JSON-292929?style=for-the-badge&logo=json&logoColor=white) ![UDP](https://img.shields.io/badge/UDP-D8B4FE?style=for-the-badge&logo=wifi&logoColor=white) ![TCP](https://img.shields.io/badge/TCP-004E64?style=for-the-badge&logo=networkx&logoColor=white) |
-| **Analytics / Visualization** | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white) ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=chartdotjs&logoColor=white) |
-| **Simulation / Synthetic Data** | ![Unity](https://img.shields.io/badge/Unity-000000?style=for-the-badge&logo=unity&logoColor=white) ![Blender](https://img.shields.io/badge/Blender-F5792A?style=for-the-badge&logo=blender&logoColor=white) ![Polycam](https://img.shields.io/badge/Polycam-272727?style=for-the-badge&logo=camera&logoColor=white) |
+| **데이터베이스** | ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white) |
+| **네트워크 / 통신** | ![Socket](https://img.shields.io/badge/Socket-000000?style=for-the-badge&logo=socketdotio&logoColor=white) ![JSON](https://img.shields.io/badge/JSON-292929?style=for-the-badge&logo=json&logoColor=white) ![UDP](https://img.shields.io/badge/UDP-D8B4FE?style=for-the-badge&logo=wifi&logoColor=white) ![TCP](https://img.shields.io/badge/TCP-004E64?style=for-the-badge&logo=networkx&logoColor=white) |
+| **분석 / 시각화** | ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white) ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=chartdotjs&logoColor=white) |
+| **시뮬레이션 / 합성 데이터** | ![Unity](https://img.shields.io/badge/Unity-000000?style=for-the-badge&logo=unity&logoColor=white) ![Blender](https://img.shields.io/badge/Blender-F5792A?style=for-the-badge&logo=blender&logoColor=white) ![Polycam](https://img.shields.io/badge/Polycam-272727?style=for-the-badge&logo=camera&logoColor=white) |
+
+
 
 ---
 
-# 9. Project Schedule Management
+# 8. 프로젝트 일정 관리
 
-Managed the program with Confluence and Jira. Visualized task assignment, development progress, and issue tracking to keep collaboration on track.
+Confluence와 Jira를 이용해 전체 일정을 관리하였습니다.
+세부 업무 분배, 기능 개발 진척도, 이슈 트래킹 등을 시각적으로 체계화하여 효율적인 협업 환경을 조성하였습니다.
 
 <p align="center">
   <img src="https://github.com/addinedu-ros-9th/deeplearning-repo-2/blob/main/assets/images/Jjra_manage.gif?raw=true" width="100%">
@@ -474,7 +454,38 @@ Managed the program with Confluence and Jira. Visualized task assignment, develo
 
 ---
 
-# 10. License
+# 9. 팀 구성
 
-This project is open-sourced under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).  
-See the [`LICENSE`](./LICENSE) file for details.
+### 🧑‍💼 김종명 [`@jongbob1918`](https://github.com/jongbob1918)
+- 프로젝트 총괄 (문서 및 일정 관리)
+- 지상 객체 탐지 AI 시스템(IDS) 구축
+- 지상 객체 탐지를 위한 딥러닝 모델 기술조사 및 제작
+- 아루코 마커 기반 맵 좌표 변환 기술조사 및 테스트 
+
+### 🧑‍💼 김지연 [`@heyjay1002`](https://github.com/heyjay1002)
+- Blender 이용 Pose Keypoint 추출 및 합성 데이터셋 생성
+- 쓰러짐 기반 YOLO Pose Custom Model 제작
+- 관제사 AI 서비스(Hawkeye) GUI 설계 및 기능 구현
+- 파일럿 AI 서비스(RedWing) LLM 및 음성 처리 기능(STT/TTS) 기술조사
+
+### 🧑‍💼 박효진 [`@Park-hyojin`](https://github.com/Park-hyojin)
+- 시스템 설계 및 백엔드 총괄
+- 메인 서버 구축 및 관리
+- 데이터베이스 구축 및 관리
+- 시스템 인터페이스 및 통신 구조 설계
+- 아루코 마커 기반 맵 좌표 변환 로직 설계
+
+### 🧑‍💼 장진혁 [`@jinhyuk2me`](https://github.com/jinhyuk2me)
+- Unity / Blender 기반 합성 데이터 파이프라인 구현  
+- 실시간 조류 충돌 위험도 분석 AI 시스템(BDS) 설계 및 구현
+- 실시간 조류 충돌 위험도 분석 AI 시스템(BDS) 딥러닝 모델 제작
+- 실시간 지상 객체 감시 시스템(IDS) 딥러닝 모델 제작
+- 파일럿 AI 서비스(RedWing) 지상 유도 보조 기능 구현
+- 파일럿 AI 서비스(RedWing) 운항 위험도 음성 경보 및 자동응답 기능 구현
+
+---
+
+# 10. 라이선스
+
+이 프로젝트는 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)에 따라 오픈소스로 제공됩니다.
+자세한 사항은 [`LICENSE`](./LICENSE) 파일을 참고해주세요.
